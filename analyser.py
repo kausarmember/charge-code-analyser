@@ -47,3 +47,51 @@ def load_forecast(filepath):
         raise csv.Error(f"Error reading forecast CSV: {e}")
 
     return forecast
+
+def load_actuals(filepath):
+    """
+    Reads each expense entry from the actuals CSV file into a list of dictionaries.
+    List is used as the order of entries matters - expenses are processed in the order they were incurred.
+    Each row is validated to ensure all required fields are present and the amount is a valid number before being added to the list.
+    """
+    actuals = []
+
+    # Check file exists before attempting to open
+    if not os.path.exists(filepath):
+        raise FileNotFoundError(
+            f"Actuals file not found: {filepath}"
+        )
+
+    try:
+        with open(filepath, newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                # Define all fields that must be present
+                required_fields = [
+                    'employee_name',
+                    'charge_code',
+                    'category',
+                    'amount',
+                    'date'
+                ]
+                # Check each required field exists and is not empty
+                for field in required_fields:
+                    if field not in row or row[field].strip() == '':
+                        raise ValueError(
+                            f"Missing or empty field '{field}' "
+                            f"in actuals CSV"
+                        )
+                # Convert amount from string to float
+                try:
+                    row['amount'] = float(row['amount'])
+                except ValueError:
+                    raise ValueError(
+                        f"Invalid amount for "
+                        f"{row['employee_name']}: "
+                        f"{row['amount']}"
+                    )
+                actuals.append(row)
+    except csv.Error as e:
+        raise csv.Error(f"Error reading actuals CSV: {e}")
+
+    return actuals
