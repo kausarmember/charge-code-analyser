@@ -96,7 +96,8 @@ class TestAnalyser(unittest.TestCase):
         self.assertEqual(result['Travel - Rail']['variance'], -200.00)
         self.assertEqual(result['Subsistence']['status'], 'UNDERSPENT')
         self.assertEqual(result['Subsistence']['variance'], 200.00)
-        self.assertEqual(result['Training']['status'], 'NO SPEND')
+        self.assertEqual(result['Training']['status'], 'UNDERSPENT')
+        self.assertEqual(result['Training']['variance'], 750.00)
     
     def test_load_forecast_missing_file_raises_error(self):
         """
