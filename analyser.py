@@ -183,3 +183,71 @@ def calculate_employee_spend(actuals):
         )
 
     return employee_spend
+
+def generate_report(forecast, actuals, output_path):
+    """
+    Generates a JSON summary report containing:
+    - Total forecast vs actual spend
+    - Variance by category with status flags
+    - Spend breakdown by employee
+    - List of flagged overspends and unbudgeted items
+    Saves the report to the specified output path.
+    """
+    variance_data = calculate_variance(forecast, actuals)
+    employee_data = calculate_employee_spend(actuals)
+
+    # Calculate totals
+    total_forecast = round(sum(forecast.values()), 2)
+    total_actual = round(
+        sum(entry['amount'] for entry in actuals), 2
+    )
+    total_variance = round(total_forecast - total_actual, 2)
+
+    # Determine overall status
+    if total_variance < 0:
+        overall_status = 'OVERSPENT'
+    elif total_variance > 0:
+        overall_status = 'UNDERSPENT'
+    else:
+        overall_status = 'ON BUDGET'
+
+    # Build flagged items list
+    flagged = []
+    for category, data in variance_data.items():
+        if data['status'] == 'OVERSPENT':
+            flagged.append(
+                f"OVERSPEND: {category} exceeded forecast "
+                f"by £{abs(data['variance']):.2f}"
+            )
+        elif data['status'] == 'UNBUDGETED':
+            flagged.append(
+                f"UNBUDGETED: {category} had no forecast "
+                f"but incurred £{data['actual']:.2f}"
+            )
+
+    # Assemble report dictionary
+    report = {
+        'charge_code': actuals[0]['charge_code'],
+        'period': actuals[0]['period'],
+        'generated_at': datetime.now().strftime(
+            '%Y-%m-%d %H:%M:%S'
+        ),
+        'summary': {
+            'total_forecast': total_forecast,
+            'total_actual': total_actual,
+            'total_variance': total_variance,
+            'overall_status': overall_status
+        },
+        'variance_by_category': variance_data,
+        'spend_by_employee': employee_data,
+        'flagged_items': flagged
+    }
+
+    # Ensure output directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+    # Write report to JSON file
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(report, f, indent=4)
+
+    return report
