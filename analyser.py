@@ -146,3 +146,40 @@ def calculate_variance(forecast, actuals):
             results[category]['status'] = 'ON BUDGET'
 
     return results
+
+def calculate_employee_spend(actuals):
+    """
+    Calculates total spend per employee.
+    Uses a dictionary keyed by employee name for efficient grouping and aggregation of expense entries.
+    """
+    employee_spend = {}
+
+    for entry in actuals:
+        name = entry['employee_name']
+        amount = entry['amount']
+        category = entry['category']
+
+        # Create a new entry for the employee if not already present in the dictionary
+        if name not in employee_spend:
+            employee_spend[name] = {
+                'total': 0.0,
+                'breakdown': {}
+            }
+
+        # Add amount to employee total
+        employee_spend[name]['total'] += amount
+        employee_spend[name]['total'] = round(
+            employee_spend[name]['total'], 2
+        )
+
+        # Track spend by category per employee
+        if category not in employee_spend[name]['breakdown']:
+            employee_spend[name]['breakdown'][category] = 0.0
+
+        # Add amount to category breakdown
+        employee_spend[name]['breakdown'][category] += amount
+        employee_spend[name]['breakdown'][category] = round(
+            employee_spend[name]['breakdown'][category], 2
+        )
+
+    return employee_spend
