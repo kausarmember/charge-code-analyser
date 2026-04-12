@@ -36,3 +36,24 @@ class TestAnalyser(unittest.TestCase):
         self.assertEqual(len(result), 10)
         self.assertIn('Travel - Rail', result)
         self.assertEqual(result['Travel - Rail'], 2750.00)
+
+    def test_load_actuals_returns_list(self):
+        """
+        Tests that load_actuals correctly loads the actuals CSV file and returns a list of dictionaries with the correct
+        number of entries and required fields.
+        """
+        # Arrange
+        filepath = os.path.join('data', 'actuals_2026_03.csv')
+
+        # Act
+        result = load_actuals(filepath)
+
+        # Assert
+        self.assertIsInstance(result, list)
+        self.assertGreater(len(result), 0)
+        self.assertIn('employee_name', result[0])
+        self.assertIn('category', result[0])
+        self.assertIn('amount', result[0])
+        self.assertIsInstance(result[0]['amount'], float)
+
+        
