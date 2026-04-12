@@ -1,0 +1,77 @@
+employee_name,charge_code,period,category,amount,date,description
+James Smith,CC-1234,2026-03,Travel - Rail,320.00,2026-03-03,Train to Manchester client site
+James Smith,CC-1234,2026-03,Subsistence,45.00,2026-03-03,Lunch during Manchester client visit
+James Smith,CC-1234,2026-03,Travel - Rail,280.00,2026-03-11,Train to Birmingham client site
+James Smith,CC-1234,2026-03,Accommodation,189.00,2026-03-11,Hotel Birmingham
+James Smith,CC-1234,2026-03,Travel - Rail,195.00,2026-03-18,Train to Leeds project meeting
+James Smith,CC-1234,2026-03,Accommodation,165.00,2026-03-18,Hotel Leeds
+James Smith,CC-1234,2026-03,Subsistence,38.00,2026-03-18,Dinner Leeds
+Sarah Jones,CC-1234,2026-03,Travel - Rail,190.00,2026-03-04,Train to London client site
+Sarah Jones,CC-1234,2026-03,Subsistence,32.00,2026-03-04,Lunch at London client site
+Sarah Jones,CC-1234,2026-03,Client Entertainment,450.00,2026-03-06,Client dinner Central London
+Sarah Jones,CC-1234,2026-03,Travel - Taxi,35.00,2026-03-06,Taxi to client dinner London
+Sarah Jones,CC-1234,2026-03,Travel - Rail,210.00,2026-03-20,Train to Edinburgh client site
+Sarah Jones,CC-1234,2026-03,Accommodation,275.00,2026-03-20,Hotel Edinburgh
+Sarah Jones,CC-1234,2026-03,Subsistence,55.00,2026-03-20,Team dinner Edinburgh
+Michael Brown,CC-1234,2026-03,Travel - Car Expenses,85.00,2026-03-05,Fuel to client site Leeds
+Michael Brown,CC-1234,2026-03,Travel - Car Expenses,12.00,2026-03-05,Parking Leeds client site
+Michael Brown,CC-1234,2026-03,Subsistence,28.00,2026-03-05,Lunch Leeds
+Michael Brown,CC-1234,2026-03,Travel - Car Expenses,92.00,2026-03-12,Fuel to client site Manchester
+Michael Brown,CC-1234,2026-03,Travel - Car Expenses,15.00,2026-03-12,Parking Manchester client site
+Michael Brown,CC-1234,2026-03,Training,1200.00,2026-03-14,Python advanced training course
+Michael Brown,CC-1234,2026-03,Software/Subscriptions,49.00,2026-03-01,Version control licence monthly
+Emily Davis,CC-1234,2026-03,Travel - Rail,285.00,2026-03-07,Train to Glasgow client site
+Emily Davis,CC-1234,2026-03,Accommodation,210.00,2026-03-07,Hotel Glasgow 2 nights
+Emily Davis,CC-1234,2026-03,Subsistence,65.00,2026-03-07,Meals Glasgow client visit
+Emily Davis,CC-1234,2026-03,Client Entertainment,780.00,2026-03-08,Client lunch Glasgow
+Emily Davis,CC-1234,2026-03,Travel - Taxi,45.00,2026-03-07,Taxi Glasgow station to hotel
+Emily Davis,CC-1234,2026-03,Travel - Taxi,40.00,2026-03-09,Taxi hotel to Glasgow station
+David Wilson,CC-1234,2026-03,Travel - Rail,145.00,2026-03-10,Train to Bristol client site
+David Wilson,CC-1234,2026-03,Subsistence,25.00,2026-03-10,Lunch Bristol
+David Wilson,CC-1234,2026-03,Software/Subscriptions,299.00,2026-03-01,Productivity software licence annual
+David Wilson,CC-1234,2026-03,Training,850.00,2026-03-17,Agile project management course Bristol
+David Wilson,CC-1234,2026-03,Other,75.00,2026-03-19,Office supplies client workshop
+Lisa Taylor,CC-1234,2026-03,Travel - Rail,225.00,2026-03-13,Train to Newcastle client site
+Lisa Taylor,CC-1234,2026-03,Accommodation,165.00,2026-03-13,Hotel Newcastle
+Lisa Taylor,CC-1234,2026-03,Subsistence,42.00,2026-03-13,Meals Newcastle client visit
+Lisa Taylor,CC-1234,2026-03,Client Entertainment,320.00,2026-03-14,Client breakfast Newcastle
+Lisa Taylor,CC-1234,2026-03,Travel - Taxi,28.00,2026-03-13,Taxi Newcastle station to hotel
+Lisa Taylor,CC-1234,2026-03,Travel - Rail,210.00,2026-03-25,Train to Leeds workshop
+Lisa Taylor,CC-1234,2026-03,Subsistence,35.00,2026-03-25,Lunch Leeds workshop
+Robert Chen,CC-1234,2026-03,Software/Subscriptions,599.00,2026-03-01,Cloud services licence monthly
+Robert Chen,CC-1234,2026-03,Software/Subscriptions,149.00,2026-03-01,Project management tool licence monthly
+Robert Chen,CC-1234,2026-03,Training,450.00,2026-03-20,Cloud architecture workshop London
+Robert Chen,CC-1234,2026-03,Travel - Rail,175.00,2026-03-06,Train to London tech conference
+Robert Chen,CC-1234,2026-03,Subsistence,48.00,2026-03-06,Meals at London conference
+Robert Chen,CC-1234,2026-03,Other,120.00,2026-03-06,Conference materials London
+Amanda White,CC-1234,2026-03,Client Entertainment,650.00,2026-03-11,Client entertainment evening Birmingham
+Amanda White,CC-1234,2026-03,Travel - Taxi,45.00,2026-03-11,Taxi to client entertainment Birmingham
+Amanda White,CC-1234,2026-03,Client Entertainment,580.00,2026-03-19,Client lunch senior stakeholders London
+Amanda White,CC-1234,2026-03,Travel - Rail,225.00,2026-03-19,Train to London client site
+Amanda White,CC-1234,2026-03,Subsistence,55.00,2026-03-19,Team lunch London
+Amanda White,CC-1234,2026-03,Other,95.00,2026-03-21,Printed materials for client
+Thomas Hughes,CC-1234,2026-03,Travel - Car Expenses,110.00,2026-03-04,Fuel and parking Birmingham client site
+Thomas Hughes,CC-1234,2026-03,Subsistence,30.00,2026-03-04,Lunch Birmingham
+Thomas Hughes,CC-1234,2026-03,Travel - Car Expenses,95.00,2026-03-18,Fuel and parking Manchester client site
+Thomas Hughes,CC-1234,2026-03,Accommodation,155.00,2026-03-18,Hotel Manchester overnight
+Thomas Hughes,CC-1234,2026-03,Training,650.00,2026-03-24,Data analysis training Leeds
+Thomas Hughes,CC-1234,2026-03,Other,45.00,2026-03-26,Stationery
+Priya Patel,CC-1234,2026-03,Travel - Rail,265.00,2026-03-10,Train to Edinburgh client site
+Priya Patel,CC-1234,2026-03,Accommodation,245.00,2026-03-10,Hotel Edinburgh 2 nights
+Priya Patel,CC-1234,2026-03,Subsistence,88.00,2026-03-10,Meals Edinburgh client visit
+Priya Patel,CC-1234,2026-03,Client Entertainment,890.00,2026-03-11,Client dinner Edinburgh
+Priya Patel,CC-1234,2026-03,Travel - Taxi,55.00,2026-03-10,Taxi Edinburgh station to hotel
+Priya Patel,CC-1234,2026-03,Software/Subscriptions,89.00,2026-03-01,Video conferencing licence monthly
+Daniel Murphy,CC-1234,2026-03,Travel - Rail,310.00,2026-03-07,Train to Glasgow conference
+Daniel Murphy,CC-1234,2026-03,Accommodation,245.00,2026-03-07,Hotel Glasgow conference
+Daniel Murphy,CC-1234,2026-03,Subsistence,65.00,2026-03-07,Meals Glasgow
+Daniel Murphy,CC-1234,2026-03,Training,550.00,2026-03-21,Cybersecurity awareness training Newcastle
+Daniel Murphy,CC-1234,2026-03,Other,80.00,2026-03-23,Team away day materials
+Daniel Murphy,CC-1234,2026-03,Travel - Car Expenses,68.00,2026-03-28,Fuel to client site Leeds
+Rachel Green,CC-1234,2026-03,Client Entertainment,420.00,2026-03-05,Client welcome lunch London
+Rachel Green,CC-1234,2026-03,Travel - Taxi,38.00,2026-03-05,Taxi to client lunch London
+Rachel Green,CC-1234,2026-03,Software/Subscriptions,199.00,2026-03-01,CRM software licence monthly
+Rachel Green,CC-1234,2026-03,Travel - Rail,265.00,2026-03-14,Train to Manchester client site
+Rachel Green,CC-1234,2026-03,Accommodation,175.00,2026-03-14,Hotel Manchester
+Rachel Green,CC-1234,2026-03,Subsistence,42.00,2026-03-14,Meals Manchester
+Rachel Green,CC-1234,2026-03,Other,55.00,2026-03-27,Miscellaneous project expenses
