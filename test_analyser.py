@@ -56,4 +56,44 @@ class TestAnalyser(unittest.TestCase):
         self.assertIn('amount', result[0])
         self.assertIsInstance(result[0]['amount'], float)
 
-        
+    def test_calculate_variance_correct_calculation(self):
+        """
+        Tests that calculate_variance correctly calculates the variance between forecast and actual spend.
+        Uses simple known values to verify the calculation is correct and status flags are assigned correctly.
+        """
+        # Arrange
+        forecast = {
+            'Travel - Rail': 1000.00,
+            'Subsistence': 500.00,
+            'Training': 750.00
+        }
+        actuals = [
+            {
+                'employee_name': 'Test Employee',
+                'charge_code': 'CC-1234',
+                'category': 'Travel - Rail',
+                'amount': 1200.00,
+                'date': '2026-03-01',
+                'description': 'Test entry',
+                'period': '2026-03'
+            },
+            {
+                'employee_name': 'Test Employee',
+                'charge_code': 'CC-1234',
+                'category': 'Subsistence',
+                'amount': 300.00,
+                'date': '2026-03-01',
+                'description': 'Test entry',
+                'period': '2026-03'
+            }
+        ]
+
+        # Act
+        result = calculate_variance(forecast, actuals)
+
+        # Assert
+        self.assertEqual(result['Travel - Rail']['status'], 'OVERSPENT')
+        self.assertEqual(result['Travel - Rail']['variance'], -200.00)
+        self.assertEqual(result['Subsistence']['status'], 'UNDERSPENT')
+        self.assertEqual(result['Subsistence']['variance'], 200.00)
+        self.assertEqual(result['Training']['status'], 'NO SPEND')
