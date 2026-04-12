@@ -97,3 +97,29 @@ class TestAnalyser(unittest.TestCase):
         self.assertEqual(result['Subsistence']['status'], 'UNDERSPENT')
         self.assertEqual(result['Subsistence']['variance'], 200.00)
         self.assertEqual(result['Training']['status'], 'NO SPEND')
+    
+    def test_load_forecast_missing_file_raises_error(self):
+        """
+        Tests that load_forecast raises a FileNotFoundError
+        when the specified file does not exist.
+        This verifies the defensive programming and error
+        handling built into the function.
+        """
+        # Arrange
+        filepath = 'data/nonexistent_file.csv'
+
+        # Act and Assert
+        with self.assertRaises(FileNotFoundError):
+            load_forecast(filepath)
+
+    def test_load_actuals_missing_file_raises_error(self):
+        """
+        Tests that load_actuals raises a FileNotFoundError when the specified file does not exist.
+        This verifies the defensive programming and error handling built into the function.
+        """
+        # Arrange
+        filepath = 'data/nonexistent_file.csv'
+
+        # Act and Assert
+        with self.assertRaises(FileNotFoundError):
+            load_actuals(filepath)
