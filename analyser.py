@@ -95,3 +95,54 @@ def load_actuals(filepath):
         raise csv.Error(f"Error reading actuals CSV: {e}")
 
     return actuals
+
+def calculate_variance(forecast, actuals):
+    """
+    Calculates variance between forecast and actual spend per category. Returns a dictionary containing:
+    - forecast amount
+    - actual amount
+    - variance (negative = overspend, positive = underspend)
+    - status flag (OVERSPENT, UNDERSPENT, ON BUDGET or UNBUDGETED)
+    """
+    # Initialise results dictionary with forecast data
+    results = {}
+    for category, amount in forecast.items():
+        results[category] = {
+            'forecast': amount,
+            'actual': 0.0,
+            'variance': 0.0,
+            'status': 'NO SPEND'
+        }
+
+    # Accumulate actual spend per category
+    for entry in actuals:
+        category = entry['category']
+        amount = entry['amount']
+
+        # Handle entries with categories not in forecast
+        if category not in results:
+            results[category] = {
+                'forecast': 0.0,
+                'actual': 0.0,
+                'variance': 0.0,
+                'status': 'UNBUDGETED'
+            }
+        results[category]['actual'] += amount
+
+    # Calculate variance and set status for each category
+    for category, data in results.items():
+        variance = data['forecast'] - data['actual']
+        results[category]['variance'] = round(variance, 2)
+
+        if data['actual'] == 0.0 and data['forecast'] == 0.0:
+            results[category]['status'] = 'NO SPEND'
+        elif variance < 0:
+            # Actual spend exceeded forecast
+            results[category]['status'] = 'OVERSPENT'
+        elif variance > 0:
+            # Actual spend came in under forecast
+            results[category]['status'] = 'UNDERSPENT'
+        else:
+            results[category]['status'] = 'ON BUDGET'
+
+    return results
