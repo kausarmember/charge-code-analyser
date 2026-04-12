@@ -1,0 +1,11 @@
+charge_code,period,category,forecast_amount
+CC-1234,2026-03,Travel - Rail,2750.00
+CC-1234,2026-03,Travel - Air,4850.00
+CC-1234,2026-03,Travel - Taxi,875.00
+CC-1234,2026-03,Travel - Car Expenses,1325.00
+CC-1234,2026-03,Accommodation,3650.00
+CC-1234,2026-03,Subsistence,1875.00
+CC-1234,2026-03,Client Entertainment,2675.00
+CC-1234,2026-03,Training,2900.00
+CC-1234,2026-03,Software/Subscriptions,1425.00
+CC-1234,2026-03,Other,475.00
