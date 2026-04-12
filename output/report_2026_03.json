@@ -1,0 +1,201 @@
+{
+    "charge_code": "CC-1234",
+    "period": "2026-03",
+    "generated_at": "2026-04-12 18:17:50",
+    "summary": {
+        "total_forecast": 22800.0,
+        "total_actual": 16224.0,
+        "total_variance": 6576.0,
+        "overall_status": "UNDERSPENT"
+    },
+    "variance_by_category": {
+        "Travel - Rail": {
+            "forecast": 2750.0,
+            "actual": 3300.0,
+            "variance": -550.0,
+            "status": "OVERSPENT"
+        },
+        "Travel - Air": {
+            "forecast": 4850.0,
+            "actual": 0.0,
+            "variance": 4850.0,
+            "status": "UNDERSPENT"
+        },
+        "Travel - Taxi": {
+            "forecast": 875.0,
+            "actual": 286.0,
+            "variance": 589.0,
+            "status": "UNDERSPENT"
+        },
+        "Travel - Car Expenses": {
+            "forecast": 1325.0,
+            "actual": 477.0,
+            "variance": 848.0,
+            "status": "UNDERSPENT"
+        },
+        "Accommodation": {
+            "forecast": 3650.0,
+            "actual": 1824.0,
+            "variance": 1826.0,
+            "status": "UNDERSPENT"
+        },
+        "Subsistence": {
+            "forecast": 1875.0,
+            "actual": 693.0,
+            "variance": 1182.0,
+            "status": "UNDERSPENT"
+        },
+        "Client Entertainment": {
+            "forecast": 2675.0,
+            "actual": 4090.0,
+            "variance": -1415.0,
+            "status": "OVERSPENT"
+        },
+        "Training": {
+            "forecast": 2900.0,
+            "actual": 3700.0,
+            "variance": -800.0,
+            "status": "OVERSPENT"
+        },
+        "Software/Subscriptions": {
+            "forecast": 1425.0,
+            "actual": 1384.0,
+            "variance": 41.0,
+            "status": "UNDERSPENT"
+        },
+        "Other": {
+            "forecast": 475.0,
+            "actual": 470.0,
+            "variance": 5.0,
+            "status": "UNDERSPENT"
+        }
+    },
+    "spend_by_employee": {
+        "James Smith": {
+            "total": 1232.0,
+            "breakdown": {
+                "Travel - Rail": 795.0,
+                "Subsistence": 83.0,
+                "Accommodation": 354.0
+            }
+        },
+        "Sarah Jones": {
+            "total": 1247.0,
+            "breakdown": {
+                "Travel - Rail": 400.0,
+                "Subsistence": 87.0,
+                "Client Entertainment": 450.0,
+                "Travel - Taxi": 35.0,
+                "Accommodation": 275.0
+            }
+        },
+        "Michael Brown": {
+            "total": 1481.0,
+            "breakdown": {
+                "Travel - Car Expenses": 204.0,
+                "Subsistence": 28.0,
+                "Training": 1200.0,
+                "Software/Subscriptions": 49.0
+            }
+        },
+        "Emily Davis": {
+            "total": 1425.0,
+            "breakdown": {
+                "Travel - Rail": 285.0,
+                "Accommodation": 210.0,
+                "Subsistence": 65.0,
+                "Client Entertainment": 780.0,
+                "Travel - Taxi": 85.0
+            }
+        },
+        "David Wilson": {
+            "total": 1394.0,
+            "breakdown": {
+                "Travel - Rail": 145.0,
+                "Subsistence": 25.0,
+                "Software/Subscriptions": 299.0,
+                "Training": 850.0,
+                "Other": 75.0
+            }
+        },
+        "Lisa Taylor": {
+            "total": 1025.0,
+            "breakdown": {
+                "Travel - Rail": 435.0,
+                "Accommodation": 165.0,
+                "Subsistence": 77.0,
+                "Client Entertainment": 320.0,
+                "Travel - Taxi": 28.0
+            }
+        },
+        "Robert Chen": {
+            "total": 1541.0,
+            "breakdown": {
+                "Software/Subscriptions": 748.0,
+                "Training": 450.0,
+                "Travel - Rail": 175.0,
+                "Subsistence": 48.0,
+                "Other": 120.0
+            }
+        },
+        "Amanda White": {
+            "total": 1650.0,
+            "breakdown": {
+                "Client Entertainment": 1230.0,
+                "Travel - Taxi": 45.0,
+                "Travel - Rail": 225.0,
+                "Subsistence": 55.0,
+                "Other": 95.0
+            }
+        },
+        "Thomas Hughes": {
+            "total": 1085.0,
+            "breakdown": {
+                "Travel - Car Expenses": 205.0,
+                "Subsistence": 30.0,
+                "Accommodation": 155.0,
+                "Training": 650.0,
+                "Other": 45.0
+            }
+        },
+        "Priya Patel": {
+            "total": 1632.0,
+            "breakdown": {
+                "Travel - Rail": 265.0,
+                "Accommodation": 245.0,
+                "Subsistence": 88.0,
+                "Client Entertainment": 890.0,
+                "Travel - Taxi": 55.0,
+                "Software/Subscriptions": 89.0
+            }
+        },
+        "Daniel Murphy": {
+            "total": 1318.0,
+            "breakdown": {
+                "Travel - Rail": 310.0,
+                "Accommodation": 245.0,
+                "Subsistence": 65.0,
+                "Training": 550.0,
+                "Other": 80.0,
+                "Travel - Car Expenses": 68.0
+            }
+        },
+        "Rachel Green": {
+            "total": 1194.0,
+            "breakdown": {
+                "Client Entertainment": 420.0,
+                "Travel - Taxi": 38.0,
+                "Software/Subscriptions": 199.0,
+                "Travel - Rail": 265.0,
+                "Accommodation": 175.0,
+                "Subsistence": 42.0,
+                "Other": 55.0
+            }
+        }
+    },
+    "flagged_items": [
+        "OVERSPEND: Travel - Rail exceeded forecast by \u00a3550.00",
+        "OVERSPEND: Client Entertainment exceeded forecast by \u00a31415.00",
+        "OVERSPEND: Training exceeded forecast by \u00a3800.00"
+    ]
+}
