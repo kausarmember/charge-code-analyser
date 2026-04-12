@@ -123,3 +123,61 @@ class TestAnalyser(unittest.TestCase):
         # Act and Assert
         with self.assertRaises(FileNotFoundError):
             load_actuals(filepath)
+
+    def test_calculate_employee_spend_correct_grouping(self):
+        """
+        Tests that calculate_employee_spend correctly groups expense entries by employee and calculates totals.
+        Verifies both the total spend and category breakdown are calculated correctly for each employee.
+        """
+        # Arrange
+        actuals = [
+            {
+                'employee_name': 'James Smith',
+                'charge_code': 'CC-1234',
+                'category': 'Travel - Rail',
+                'amount': 320.00,
+                'date': '2026-03-03',
+                'description': 'Train to Manchester',
+                'period': '2026-03'
+            },
+            {
+                'employee_name': 'James Smith',
+                'charge_code': 'CC-1234',
+                'category': 'Subsistence',
+                'amount': 45.00,
+                'date': '2026-03-03',
+                'description': 'Lunch Manchester',
+                'period': '2026-03'
+            },
+            {
+                'employee_name': 'Sarah Jones',
+                'charge_code': 'CC-1234',
+                'category': 'Travel - Rail',
+                'amount': 190.00,
+                'date': '2026-03-04',
+                'description': 'Train to London',
+                'period': '2026-03'
+            }
+        ]
+
+        # Act
+        result = calculate_employee_spend(actuals)
+
+        # Assert
+        self.assertIn('James Smith', result)
+        self.assertIn('Sarah Jones', result)
+        self.assertEqual(result['James Smith']['total'], 365.00)
+        self.assertEqual(
+            result['James Smith']['breakdown']['Travel - Rail'],
+            320.00
+        )
+        self.assertEqual(
+            result['James Smith']['breakdown']['Subsistence'],
+            45.00
+        )
+        self.assertEqual(result['Sarah Jones']['total'], 190.00)
+
+
+# Run all tests when this file is executed directly
+if __name__ == '__main__':
+    unittest.main()
