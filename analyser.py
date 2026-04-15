@@ -131,6 +131,9 @@ def calculate_variance(forecast, actuals):
 
     # Calculate variance and set status for each category
     for category, data in results.items():
+        # Skip categories already marked as unbudgeted
+        if data['status'] == 'UNBUDGETED':
+            continue
         variance = data['forecast'] - data['actual']
         results[category]['variance'] = round(variance, 2)
 

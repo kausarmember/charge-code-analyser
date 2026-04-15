@@ -177,7 +177,51 @@ class TestAnalyser(unittest.TestCase):
             45.00
         )
         self.assertEqual(result['Sarah Jones']['total'], 190.00)
+        
+    def test_calculate_variance_unbudgeted_category(self):
+        """
+        Tests that calculate_variance correctly identifies and flags categories that appear in actuals but
+        have no corresponding forecast entry.
+        This verifies the tool handles unexpected expense categories gracefully.
+        """
+        # Arrange
+        forecast = {
+            'Travel - Rail': 1000.00
+        }
+        actuals = [
+            {
+                'employee_name': 'Test Employee',
+                'charge_code': 'CC-1234',
+                'category': 'Travel - Rail',
+                'amount': 500.00,
+                'date': '2026-03-01',
+                'description': 'Test entry',
+                'period': '2026-03'
+            },
+            {
+                'employee_name': 'Test Employee',
+                'charge_code': 'CC-1234',
+                'category': 'Unplanned Expense',
+                'amount': 150.00,
+                'date': '2026-03-01',
+                'description': 'Unbudgeted item',
+                'period': '2026-03'
+            }
+        ]
 
+        # Act
+        result = calculate_variance(forecast, actuals)
+
+        # Assert
+        self.assertIn('Unplanned Expense', result)
+        self.assertEqual(
+            result['Unplanned Expense']['status'],
+            'UNBUDGETED'
+        )
+        self.assertEqual(
+            result['Unplanned Expense']['actual'],
+            150.00
+        )
 
 # Run all tests when this file is executed directly
 if __name__ == '__main__':

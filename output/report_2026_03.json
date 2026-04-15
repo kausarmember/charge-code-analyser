@@ -1,7 +1,7 @@
 {
     "charge_code": "CC-1234",
     "period": "2026-03",
-    "generated_at": "2026-04-12 18:17:50",
+    "generated_at": "2026-04-15 13:49:25",
     "summary": {
         "total_forecast": 22800.0,
         "total_actual": 16224.0,
