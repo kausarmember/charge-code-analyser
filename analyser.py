@@ -214,13 +214,18 @@ def generate_report(forecast, actuals, output_path):
     else:
         overall_status = 'ON BUDGET'
 
-    # Build flagged items list
+    # Build flagged items list including overspends, underspends and unbudgeted items for review
     flagged = []
     for category, data in variance_data.items():
         if data['status'] == 'OVERSPENT':
             flagged.append(
                 f"OVERSPEND: {category} exceeded forecast "
                 f"by £{abs(data['variance']):.2f}"
+            )
+        elif data['status'] == 'UNDERSPENT' :
+            flagged.append(
+                f"UNDERSPEND: {category} underspent by " 
+                f"£{abs(data['variance']):.2f}"
             )
         elif data['status'] == 'UNBUDGETED':
             flagged.append(

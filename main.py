@@ -55,6 +55,8 @@ def main():
         for item in report['flagged_items']:
             if 'OVERSPEND' in item:
                 print(f"  ! OVERSPEND: {item.split('OVERSPEND: ')[1]}")
+            elif 'UNDERSPEND' in item:
+                print(f"  v UNDERSPEND: {item.split('UNDERSPEND: ')[1]} ")
             elif 'UNBUDGETED' in item:
                 print(f"  ? UNBUDGETED: {item.split('UNBUDGETED: ')[1]}")
 
