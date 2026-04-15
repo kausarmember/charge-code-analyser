@@ -47,18 +47,56 @@ def main():
     print(f"Total Variance:  £{report['summary']['total_variance']:,.2f}")
     print(f"Status:          {report['summary']['overall_status']}")
 
-    # Print any flagged items to console for immediate review
+    # Print any flagged items to console for review
     if report['flagged_items']:
         print("\n" + "=" * 40)
         print("FLAGGED ITEMS")
         print("=" * 40)
-        for item in report['flagged_items']:
-            if 'OVERSPEND' in item:
-                print(f"  ! OVERSPEND: {item.split('OVERSPEND: ')[1]}")
-            elif 'UNDERSPEND' in item:
-                print(f"  v UNDERSPEND: {item.split('UNDERSPEND: ')[1]} ")
-            elif 'UNBUDGETED' in item:
-                print(f"  ? UNBUDGETED: {item.split('UNBUDGETED: ')[1]}")
+
+        # Filter overspends and calculate total
+        overspends = [i for i in report['flagged_items']
+                      if 'OVERSPEND' in i]
+
+        if overspends:
+            # Extract amounts from flagged strings for total
+            overspend_total = sum(
+                float(i.split('£')[1])
+                for i in overspends
+            )
+
+            print(f"\n  OVERSPENDS "
+                  f"({len(overspends)} items | "
+                  f"Total: £{overspend_total:,.2f}):")
+            for item in overspends:
+                print(f"    ! {item.split('OVERSPEND: ')[1]}")
+
+        # Filter underspends and calculate total
+        underspends = [i for i in report['flagged_items']
+                       if 'UNDERSPEND' in i]
+        if underspends:
+            underspend_total = sum(
+                  float(i.split('£')[1])
+                  for i in underspends
+            )
+            print(f"\n  UNDERSPENDS "
+                  f"({len(underspends)} items | "
+                  f"Total: £{underspend_total:,.2f}):")
+            for item in underspends:
+                print(f"    v {item.split('UNDERSPEND: ')[1]}")
+
+        # Filter unbudgeted items and calculate total
+        unbudgeted = [i for i in report['flagged_items']
+                      if 'UNBUDGETED' in i]
+        if unbudgeted:
+            unbudgeted_total = sum(
+                float(i.split('£')[1])
+                for i in unbudgeted
+            )
+            print(f"\n  UNBUDGETED "
+                  f"({len(unbudgeted)} items | "
+                  f"Total: £{unbudgeted_total:,.2f}):")
+            for item in unbudgeted:
+                print(f"    ? {item.split('UNBUDGETED: ')[1]}")
 
     print(f"\nFull report saved to {OUTPUT_FILE}")
 
