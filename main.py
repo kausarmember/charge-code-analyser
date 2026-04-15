@@ -65,7 +65,8 @@ def main():
             )
 
             print(f"\n  OVERSPENDS "
-                  f"({len(overspends)} items | "
+                  f"({len(overspends)} "
+                  f"{'item' if len(overspends) == 1 else 'items'} | "
                   f"Total: £{overspend_total:,.2f}):")
             for item in overspends:
                 print(f"    ! {item.split('OVERSPEND: ')[1]}")
@@ -79,7 +80,8 @@ def main():
                   for i in underspends
             )
             print(f"\n  UNDERSPENDS "
-                  f"({len(underspends)} items | "
+                  f"({len(underspends)} "
+                  f"{'item' if len(underspends) == 1 else 'items'} | "
                   f"Total: £{underspend_total:,.2f}):")
             for item in underspends:
                 print(f"    v {item.split('UNDERSPEND: ')[1]}")
@@ -93,7 +95,8 @@ def main():
                 for i in unbudgeted
             )
             print(f"\n  UNBUDGETED "
-                  f"({len(unbudgeted)} items | "
+                  f"({len(unbudgeted)} "
+                   f"{'item' if len(unbudgeted) == 1 else 'items'} | "
                   f"Total: £{unbudgeted_total:,.2f}):")
             for item in unbudgeted:
                 print(f"    ? {item.split('UNBUDGETED: ')[1]}")
