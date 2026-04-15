@@ -53,7 +53,10 @@ def main():
         print("FLAGGED ITEMS")
         print("=" * 40)
         for item in report['flagged_items']:
-            print(f"  ! {item}")
+            if 'OVERSPEND' in item:
+                print(f"  ! OVERSPEND: {item.split('OVERSPEND: ')[1]}")
+            elif 'UNBUDGETED' in item:
+                print(f"  ? UNBUDGETED: {item.split('UNBUDGETED: ')[1]}")
 
     print(f"\nFull report saved to {OUTPUT_FILE}")
 
