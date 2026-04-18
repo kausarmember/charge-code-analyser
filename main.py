@@ -101,8 +101,74 @@ def main():
             for item in unbudgeted:
                 print(f"    ? {item.split('UNBUDGETED: ')[1]}")
 
-    print(f"\nFull report saved to {OUTPUT_FILE}")
+    # Replace .json extension to generate matching text output path
+    txt_output = OUTPUT_FILE.replace('.json', '.txt')
+    with open(txt_output, 'w', encoding='utf-8') as f:
+        f.write("Charge Code Analyser\n")
+        f.write("=" * 40 + "\n")
+        f.write(f"Charge Code:     {report['charge_code']}\n")
+        f.write(f"Period:          {report['period']}\n")
+        f.write(f"Generated:       {report['generated_at']}\n")
+        f.write("=" * 40 + "\n")
+        f.write("SUMMARY\n")
+        f.write("=" * 40 + "\n")
+        f.write(f"Total Forecast:  £{report['summary']['total_forecast']:,.2f}\n")
+        f.write(f"Total Actual:    £{report['summary']['total_actual']:,.2f}\n")
+        # Negative variance = overspend, positive = underspend
+        f.write(f"Total Variance:  £{report['summary']['total_variance']:,.2f}\n")
+        f.write(f"Status:          {report['summary']['overall_status']}\n")
 
+        if report['flagged_items']:
+            f.write("\n" + "=" * 40 + "\n")
+            f.write("FLAGGED ITEMS\n")
+            f.write("=" * 40 + "\n")
+
+            # split('£')[1] extracts the numeric amount from the flagged string
+            overspends = [i for i in report['flagged_items']
+                         if 'OVERSPEND' in i]
+            if overspends:
+                overspend_total = sum(
+                    float(i.split('£')[1])
+                    for i in overspends
+                )
+                f.write(f"\n  OVERSPENDS "
+                        f"({len(overspends)} "
+                        f"{'item' if len(overspends) == 1 else 'items'} | "
+                        f"Total: £{overspend_total:,.2f}):\n")
+                for item in overspends:
+                    f.write(f"    ! {item.split('OVERSPEND: ')[1]}\n")
+
+            underspends = [i for i in report['flagged_items']
+                          if 'UNDERSPEND' in i]
+            if underspends:
+                underspend_total = sum(
+                    float(i.split('£')[1])
+                    for i in underspends
+                )
+                f.write(f"\n  UNDERSPENDS "
+                        f"({len(underspends)} "
+                        f"{'item' if len(underspends) == 1 else 'items'} | "
+                        f"Total: £{underspend_total:,.2f}):\n")
+                for item in underspends:
+                    f.write(f"    v {item.split('UNDERSPEND: ')[1]}\n")
+
+            # Unbudgeted items flagged as they were not forecast and require investigation by the charge code owner
+            unbudgeted = [i for i in report['flagged_items']
+                         if 'UNBUDGETED' in i]
+            if unbudgeted:
+                unbudgeted_total = sum(
+                    float(i.split('£')[1])
+                    for i in unbudgeted
+                )
+                f.write(f"\n  UNBUDGETED "
+                        f"({len(unbudgeted)} "
+                        f"{'item' if len(unbudgeted) == 1 else 'items'} | "
+                        f"Total: £{unbudgeted_total:,.2f}):\n")
+                for item in unbudgeted:
+                    f.write(f"    ? {item.split('UNBUDGETED: ')[1]}\n")
+
+    print(f"\nJSON report saved to {OUTPUT_FILE}")
+    print(f"Text summary saved to {txt_output}")
 """
 Entry point guard — ensures main() is only called when this script is run directly, 
 not when imported as a module by another script such as test_analyser.py

@@ -1,11 +1,11 @@
 {
     "charge_code": "CC-1234",
     "period": "2026-03",
-    "generated_at": "2026-04-15 13:49:25",
+    "generated_at": "2026-04-18 12:26:11",
     "summary": {
         "total_forecast": 22800.0,
-        "total_actual": 16224.0,
-        "total_variance": 6576.0,
+        "total_actual": 16474.0,
+        "total_variance": 6326.0,
         "overall_status": "UNDERSPENT"
     },
     "variance_by_category": {
@@ -68,15 +68,22 @@
             "actual": 470.0,
             "variance": 5.0,
             "status": "UNDERSPENT"
+        },
+        "Legal Fees": {
+            "forecast": 0.0,
+            "actual": 250.0,
+            "variance": 0.0,
+            "status": "UNBUDGETED"
         }
     },
     "spend_by_employee": {
         "James Smith": {
-            "total": 1232.0,
+            "total": 1482.0,
             "breakdown": {
                 "Travel - Rail": 795.0,
                 "Subsistence": 83.0,
-                "Accommodation": 354.0
+                "Accommodation": 354.0,
+                "Legal Fees": 250.0
             }
         },
         "Sarah Jones": {
@@ -195,7 +202,15 @@
     },
     "flagged_items": [
         "OVERSPEND: Travel - Rail exceeded forecast by \u00a3550.00",
+        "UNDERSPEND: Travel - Air underspent by \u00a34850.00",
+        "UNDERSPEND: Travel - Taxi underspent by \u00a3589.00",
+        "UNDERSPEND: Travel - Car Expenses underspent by \u00a3848.00",
+        "UNDERSPEND: Accommodation underspent by \u00a31826.00",
+        "UNDERSPEND: Subsistence underspent by \u00a31182.00",
         "OVERSPEND: Client Entertainment exceeded forecast by \u00a31415.00",
-        "OVERSPEND: Training exceeded forecast by \u00a3800.00"
+        "OVERSPEND: Training exceeded forecast by \u00a3800.00",
+        "UNDERSPEND: Software/Subscriptions underspent by \u00a341.00",
+        "UNDERSPEND: Other underspent by \u00a35.00",
+        "UNBUDGETED: Legal Fees had no forecast but incurred \u00a3250.00"
     ]
 }

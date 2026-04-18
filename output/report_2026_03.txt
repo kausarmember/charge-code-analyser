@@ -1,0 +1,33 @@
+Charge Code Analyser
+========================================
+Charge Code:     CC-1234
+Period:          2026-03
+Generated:       2026-04-18 12:26:11
+========================================
+SUMMARY
+========================================
+Total Forecast:  £22,800.00
+Total Actual:    £16,474.00
+Total Variance:  £6,326.00
+Status:          UNDERSPENT
+
+========================================
+FLAGGED ITEMS
+========================================
+
+  OVERSPENDS (3 items | Total: £2,765.00):
+    ! Travel - Rail exceeded forecast by £550.00
+    ! Client Entertainment exceeded forecast by £1415.00
+    ! Training exceeded forecast by £800.00
+
+  UNDERSPENDS (7 items | Total: £9,341.00):
+    v Travel - Air underspent by £4850.00
+    v Travel - Taxi underspent by £589.00
+    v Travel - Car Expenses underspent by £848.00
+    v Accommodation underspent by £1826.00
+    v Subsistence underspent by £1182.00
+    v Software/Subscriptions underspent by £41.00
+    v Other underspent by £5.00
+
+  UNBUDGETED (1 item | Total: £250.00):
+    ? Legal Fees had no forecast but incurred £250.00
