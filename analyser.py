@@ -13,6 +13,16 @@ def load_forecast(filepath):
     """
     Opens the forecast CSV file and stores each category and its budgeted amount in a dictionary.
     Dictionary is used for fast lookups when matching categories against actual expense entries.
+
+    Args:
+        filepath (str): Path to the forecast CSV file.
+
+    Returns:
+        dict: Category names as keys, forecast amounts as values.
+
+    Raises:
+        FileNotFoundError: If the CSV file does not exist.
+        ValueError: If required columns are missing or amounts are invalid.
     """
     forecast = {}
 
@@ -51,8 +61,17 @@ def load_forecast(filepath):
 def load_actuals(filepath):
     """
     Reads each expense entry from the actuals CSV file into a list of dictionaries.
-    List is used as the order of entries matters - expenses are processed in the order they were incurred.
-    Each row is validated to ensure all required fields are present and the amount is a valid number before being added to the list.
+    List is used as the order matters - expenses are processed in the order they were incurred.
+    
+     Args:
+        filepath (str): Path to the actuals CSV file.
+
+    Returns:
+        list: List of dictionaries, one per expense entry.
+
+    Raises:
+        FileNotFoundError: If the CSV file does not exist.
+        ValueError: If required fields are missing or amounts are invalid.
     """
     actuals = []
 
@@ -98,11 +117,16 @@ def load_actuals(filepath):
 
 def calculate_variance(forecast, actuals):
     """
-    Calculates variance between forecast and actual spend per category. Returns a dictionary containing:
-    - forecast amount
-    - actual amount
-    - variance (negative = overspend, positive = underspend)
-    - status flag (OVERSPENT, UNDERSPENT, ON BUDGET or UNBUDGETED)
+    Calculates variance between forecast and actual spend
+    per category.
+
+    Args:
+        forecast (dict): Category names and budgeted amounts.
+        actuals (list): List of actual expense entry dictionaries.
+
+    Returns:
+        dict: Category results with forecast, actual, variance
+              and status flag per category.
     """
     # Initialise results dictionary with forecast data
     results = {}
@@ -152,8 +176,15 @@ def calculate_variance(forecast, actuals):
 
 def calculate_employee_spend(actuals):
     """
-    Calculates total spend per employee.
-    Uses a dictionary keyed by employee name for efficient grouping and aggregation of expense entries.
+    Calculates total spend per employee and breakdown
+    by category.
+
+    Args:
+        actuals (list): List of actual expense entry dictionaries.
+
+    Returns:
+        dict: Employee names as keys, total spend and category
+              breakdown as values.
     """
     employee_spend = {}
 
@@ -162,14 +193,13 @@ def calculate_employee_spend(actuals):
         amount = entry['amount']
         category = entry['category']
 
-        # Create a new entry for the employee if not already present in the dictionary
+        # Create employee entry if not already present
         if name not in employee_spend:
             employee_spend[name] = {
                 'total': 0.0,
                 'breakdown': {}
             }
 
-        # Add amount to employee total
         employee_spend[name]['total'] += amount
         employee_spend[name]['total'] = round(
             employee_spend[name]['total'], 2
@@ -179,7 +209,6 @@ def calculate_employee_spend(actuals):
         if category not in employee_spend[name]['breakdown']:
             employee_spend[name]['breakdown'][category] = 0.0
 
-        # Add amount to category breakdown
         employee_spend[name]['breakdown'][category] += amount
         employee_spend[name]['breakdown'][category] = round(
             employee_spend[name]['breakdown'][category], 2
@@ -189,17 +218,24 @@ def calculate_employee_spend(actuals):
 
 def generate_report(forecast, actuals, output_path):
     """
-    Generates a JSON summary report containing:
-    - Total forecast vs actual spend
-    - Variance by category with status flags
-    - Spend breakdown by employee
-    - List of flagged overspends and unbudgeted items
-    Saves the report to the specified output path.
+    Generates a JSON summary report containing total forecast
+    vs actual spend, variance by category, spend by employee
+    and flagged items. Saves to the specified output path.
+
+    Args:
+        forecast (dict): Category names and budgeted amounts.
+        actuals (list): List of actual expense entry dictionaries.
+        output_path (str): File path for the JSON output report.
+
+    Returns:
+        dict: The complete report as a dictionary.
+
+    Raises:
+        OSError: If the output directory cannot be created.
     """
     variance_data = calculate_variance(forecast, actuals)
     employee_data = calculate_employee_spend(actuals)
 
-    # Calculate totals
     total_forecast = round(sum(forecast.values()), 2)
     total_actual = round(
         sum(entry['amount'] for entry in actuals), 2
@@ -214,7 +250,8 @@ def generate_report(forecast, actuals, output_path):
     else:
         overall_status = 'ON BUDGET'
 
-    # Build flagged items list including overspends, underspends and unbudgeted items for review
+    # Build flagged items list including overspends,
+    # underspends and unbudgeted items for review
     flagged = []
     for category, data in variance_data.items():
         if data['status'] == 'OVERSPENT':
@@ -222,7 +259,7 @@ def generate_report(forecast, actuals, output_path):
                 f"OVERSPEND: {category} exceeded forecast "
                 f"by £{abs(data['variance']):.2f}"
             )
-        elif data['status'] == 'UNDERSPENT' :
+        elif data['status'] == 'UNDERSPENT':
             flagged.append(
                 f"UNDERSPEND: {category} underspent by " 
                 f"£{abs(data['variance']):.2f}"
@@ -233,7 +270,6 @@ def generate_report(forecast, actuals, output_path):
                 f"but incurred £{data['actual']:.2f}"
             )
 
-    # Assemble report dictionary
     report = {
         'charge_code': actuals[0]['charge_code'],
         'period': actuals[0]['period'],

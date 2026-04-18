@@ -15,14 +15,16 @@ from analyser import (
 
 class TestAnalyser(unittest.TestCase):
     """
-    Test class for the Charge Code Analyser.
-    Uses unittest.TestCase to test core functions in analyser.py against known inputs and expected outputs.
-    Following the Arrange, Act, Assert pattern for each test.
+    Unit test suite for the Charge Code Analyser.
+    Tests core functions in analyser.py against known inputs
+    and expected outputs following the Arrange, Act, Assert
+    pattern throughout.
     """
 
     def test_load_forecast_returns_dictionary(self):
         """
-        Tests that load_forecast correctly loads the forecast CSV file and returns a dictionary with the correct
+        Tests that load_forecast correctly loads the forecast
+        CSV file and returns a dictionary with the correct
         number of categories and amounts.
         """
         # Arrange
@@ -39,8 +41,9 @@ class TestAnalyser(unittest.TestCase):
 
     def test_load_actuals_returns_list(self):
         """
-        Tests that load_actuals correctly loads the actuals CSV file and returns a list of dictionaries with the correct
-        number of entries and required fields.
+        Tests that load_actuals correctly loads the actuals
+        CSV file and returns a list of dictionaries with
+        the correct number of entries and required fields.
         """
         # Arrange
         filepath = os.path.join('data', 'actuals_2026_03.csv')
@@ -58,8 +61,10 @@ class TestAnalyser(unittest.TestCase):
 
     def test_calculate_variance_correct_calculation(self):
         """
-        Tests that calculate_variance correctly calculates the variance between forecast and actual spend.
-        Uses simple known values to verify the calculation is correct and status flags are assigned correctly.
+        Tests that calculate_variance correctly calculates
+        the variance between forecast and actual spend.
+        Uses simple known values to verify the calculation
+        is correct and status flags are assigned correctly.
         """
         # Arrange
         forecast = {
@@ -98,7 +103,7 @@ class TestAnalyser(unittest.TestCase):
         self.assertEqual(result['Subsistence']['variance'], 200.00)
         self.assertEqual(result['Training']['status'], 'UNDERSPENT')
         self.assertEqual(result['Training']['variance'], 750.00)
-    
+
     def test_load_forecast_missing_file_raises_error(self):
         """
         Tests that load_forecast raises a FileNotFoundError
@@ -115,8 +120,10 @@ class TestAnalyser(unittest.TestCase):
 
     def test_load_actuals_missing_file_raises_error(self):
         """
-        Tests that load_actuals raises a FileNotFoundError when the specified file does not exist.
-        This verifies the defensive programming and error handling built into the function.
+        Tests that load_actuals raises a FileNotFoundError
+        when the specified file does not exist.
+        This verifies the defensive programming and error
+        handling built into the function.
         """
         # Arrange
         filepath = 'data/nonexistent_file.csv'
@@ -127,8 +134,10 @@ class TestAnalyser(unittest.TestCase):
 
     def test_calculate_employee_spend_correct_grouping(self):
         """
-        Tests that calculate_employee_spend correctly groups expense entries by employee and calculates totals.
-        Verifies both the total spend and category breakdown are calculated correctly for each employee.
+        Tests that calculate_employee_spend correctly groups
+        expense entries by employee and calculates totals.
+        Verifies both the total spend and category breakdown
+        are calculated correctly for each employee.
         """
         # Arrange
         actuals = [
@@ -177,12 +186,13 @@ class TestAnalyser(unittest.TestCase):
             45.00
         )
         self.assertEqual(result['Sarah Jones']['total'], 190.00)
-        
+
     def test_calculate_variance_unbudgeted_category(self):
         """
-        Tests that calculate_variance correctly identifies and flags categories that appear in actuals but
-        have no corresponding forecast entry.
-        This verifies the tool handles unexpected expense categories gracefully.
+        Tests that calculate_variance correctly identifies
+        and flags categories that appear in actuals but have
+        no corresponding forecast entry. This verifies the
+        tool handles unexpected expense categories gracefully.
         """
         # Arrange
         forecast = {

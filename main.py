@@ -5,7 +5,8 @@ Loads forecast and actual expense data from CSV files, runs the analysis and gen
 """
 
 import os
-from analyser import load_forecast, load_actuals, generate_report # Import core analysis functions from analyser module
+# Import core analysis functions from analyser module
+from analyser import load_forecast, load_actuals, generate_report
 
 # Define file paths for input and output
 FORECAST_FILE = os.path.join('data', 'forecast_2026_03.csv')
@@ -15,9 +16,15 @@ OUTPUT_FILE = os.path.join('output', 'report_2026_03.json')
 
 def main():
     """
-    Main function that orchestrates the charge code analysis.
-    Loads forecast and actuals data from CSV files, generates a JSON summary report and prints a formatted summary 
-    to the console including total forecast, actual spend, variance and any flagged overspends or unbudgeted items.
+    Orchestrates the charge code analysis pipeline.
+    Loads forecast and actuals data from CSV files, generates
+    a JSON summary report and plain text summary and prints
+    a formatted summary to the console including total forecast,
+    actual spend, variance and flagged items.
+
+    Raises:
+        FileNotFoundError: If input CSV files are not found.
+        ValueError: If input data is invalid or malformed.
     """
     print("Charge Code Analyser")
     print("=" * 40)
@@ -31,8 +38,7 @@ def main():
     print(f"\nLoading actuals data from {ACTUALS_FILE}...")
     actuals = load_actuals(ACTUALS_FILE)
     print(f"Loaded {len(actuals)} expense entries")
-
-    # Generate the summary report
+    
     print(f"\nGenerating report...")
     report = generate_report(forecast, actuals, OUTPUT_FILE)
 
@@ -152,7 +158,8 @@ def main():
                 for item in underspends:
                     f.write(f"    v {item.split('UNDERSPEND: ')[1]}\n")
 
-            # Unbudgeted items flagged as they were not forecast and require investigation by the charge code owner
+            # Unbudgeted items flagged as they were not forecast 
+            # and require investigation by the charge code owner
             unbudgeted = [i for i in report['flagged_items']
                          if 'UNBUDGETED' in i]
             if unbudgeted:
@@ -169,9 +176,8 @@ def main():
 
     print(f"\nJSON report saved to {OUTPUT_FILE}")
     print(f"Text summary saved to {txt_output}")
-"""
-Entry point guard — ensures main() is only called when this script is run directly, 
-not when imported as a module by another script such as test_analyser.py
-"""
+
+# Entry point guard — ensures main() is only called when
+# this script is run directly, not when imported as a module
 if __name__ == "__main__":
     main()
