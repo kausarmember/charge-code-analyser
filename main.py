@@ -107,7 +107,7 @@ def main():
             for item in unbudgeted:
                 print(f"    ? {item.split('UNBUDGETED: ')[1]}")
 
-    # Replace .json extension to generate matching text output path
+    # Derive text output path from JSON path to keep filenames consistent
     txt_output = OUTPUT_FILE.replace('.json', '.txt')
     with open(txt_output, 'w', encoding='utf-8') as f:
         f.write("Charge Code Analyser\n")
