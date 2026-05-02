@@ -232,6 +232,53 @@ class TestAnalyser(unittest.TestCase):
             result['Unplanned Expense']['actual'],
             150.00
         )
+    
+    def test_calculate_variance_empty_actuals(self):
+        """
+        Tests that calculate_variance handles an empty
+        actuals list correctly, returning all categories
+        with zero actual spend and UNDERSPENT status.
+        """
+        # Arrange
+        forecast = {'Travel - Rail': 1000.00}
+        actuals = []
+
+        # Act
+        result = calculate_variance(forecast, actuals)
+
+        # Assert
+        self.assertEqual(result['Travel - Rail']['actual'], 0.0)
+        self.assertEqual(
+            result['Travel - Rail']['status'], 'UNDERSPENT'
+        )
+
+    def test_load_actuals_invalid_amount_raises_error(self):
+        """
+        Tests that load_actuals raises a ValueError when
+        an expense entry contains a non-numeric amount,
+        preventing silent data corruption.
+        """
+        # Arrange — create a temporary CSV with invalid amount
+        import tempfile
+        import os
+        content = (
+            "employee_name,charge_code,period,"
+            "category,amount,date,description\n"
+            "Test Employee,CC-1234,2026-03,"
+            "Travel - Rail,abc,2026-03-01,test entry\n"
+        )
+        with tempfile.NamedTemporaryFile(
+            mode='w', suffix='.csv', delete=False
+        ) as f:
+            f.write(content)
+            filepath = f.name
+
+        # Act and Assert
+        try:
+            with self.assertRaises(ValueError):
+                load_actuals(filepath)
+        finally:
+            os.unlink(filepath)
 
 # Run all tests when this file is executed directly
 if __name__ == '__main__':
